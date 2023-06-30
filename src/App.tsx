@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChakraProvider, Container, SimpleGrid } from '@chakra-ui/react'
+import { ChakraProvider, Container, Grid, GridItem } from '@chakra-ui/react'
 import TripPanel from './components/TripPanel';
 
 const App = () => {
@@ -8,25 +8,85 @@ const App = () => {
     countriesDesc: '8 countries',
     durationDesc: '21 Days',
     emissionOffset: '810kg',
-    rating: 4.5,
-    imageUrl: '',
-    imageAlt: 'some alt',
+    rating: 2.35,
+    imageUrl: 'https://picsum.photos/600/800',
   };
 
   return (
     <ChakraProvider>
-      <Container maxW='2xl'>
-        <SimpleGrid minChildWidth='120px' spacing='40px'>
-          <TripPanel 
-            title={test.title}
-            countriesDesc={test.countriesDesc}
-            durationDesc={test.durationDesc}
-            emissionOffset={test.emissionOffset}
-            rating={test.rating}
-            imageUrl={test.imageUrl}
-            imageAlt={test.imageAlt}
-          />
-        </SimpleGrid>
+      <Container maxW='container.xl'>
+        <Grid 
+          gap={4}
+          autoFlow="row dense"
+          templateRows='repeat(2, 1fr)'
+          templateColumns='repeat(3, 1fr)'
+        >
+          <GridItem w='100%' >
+            <TripPanel 
+              title={test.title}
+              countriesDesc={test.countriesDesc}
+              durationDesc={test.durationDesc}
+              emissionOffset={test.emissionOffset}
+              rating={test.rating}
+              imageUrl={test.imageUrl}
+            />
+          </GridItem>
+
+          <GridItem w='100%' >
+            <TripPanel 
+              title={test.title}
+              countriesDesc={test.countriesDesc}
+              durationDesc={test.durationDesc}
+              emissionOffset={test.emissionOffset}
+              rating={test.rating}
+              imageUrl={test.imageUrl}
+            />
+          </GridItem>
+        
+          <GridItem w='100%' >
+            <TripPanel 
+              title={test.title}
+              countriesDesc={test.countriesDesc}
+              durationDesc={test.durationDesc}
+              emissionOffset={test.emissionOffset}
+              rating={test.rating}
+              imageUrl={test.imageUrl}
+            />
+          </GridItem>
+
+          <GridItem w='100%' >
+            <TripPanel 
+              title={test.title}
+              countriesDesc={test.countriesDesc}
+              durationDesc={test.durationDesc}
+              emissionOffset={test.emissionOffset}
+              rating={test.rating}
+              imageUrl={test.imageUrl}
+            />
+          </GridItem>
+
+          <GridItem w='100%' >
+            <TripPanel 
+              title={test.title}
+              countriesDesc={test.countriesDesc}
+              durationDesc={test.durationDesc}
+              emissionOffset={test.emissionOffset}
+              rating={test.rating}
+              imageUrl={test.imageUrl}
+            />
+          </GridItem>
+
+          <GridItem w='100%' >
+            <TripPanel 
+              title={test.title}
+              countriesDesc={test.countriesDesc}
+              durationDesc={test.durationDesc}
+              emissionOffset={test.emissionOffset}
+              rating={test.rating}
+              imageUrl={test.imageUrl}
+            />
+          </GridItem>
+        </Grid>
       </Container>
     </ChakraProvider>
   );
