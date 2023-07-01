@@ -1,35 +1,76 @@
-import { Grid, GridItem } from "@chakra-ui/react";
-import TripPanel from "./TripPanel";
-
-const test = {
-    title: 'European Quest',
-    countriesDesc: '8 countries',
-    durationDesc: '21 Days',
-    emissionOffset: '810kg',
-    rating: 2.35,
-    imageUrl: 'https://picsum.photos/600/800',
-};
+import { Grid, GridItem, Spinner, Text } from "@chakra-ui/react";
+import TripPanel, { ITripDetails } from "./TripPanel";
+import { useEffect, useState } from "react";
 
 const Trips = () => {
-    return (
-        <Grid
+    const [trips, setTrips] = useState<ITripDetails[]>([]);
+    const [error, setError] = useState<unknown | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
+
+    const getTrips = async (controller: AbortController) => {
+        try {
+            setError(null);
+            setLoading(true);
+
+            const data = await (await fetch('data.json', {
+                headers: {
+    
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                signal: controller.signal,
+            })).json();
+      
+            setTrips(data as ITripDetails[] ?? []);
+        } catch (err) {
+            if (!controller.signal.aborted) {
+                setError(err);
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
+
+
+    useEffect(() => {
+        const controller = new AbortController();
+
+        getTrips(controller);
+
+        return () => {
+            controller.abort();
+        }
+    }, []);
+
+    return (<>
+        { loading && <Spinner
+            thickness='4px'
+            speed='0.65s'
+            emptyColor='gray.200'
+            color='blue.500'
+            size='xl'
+        />}
+
+        { !error && ! loading && <Grid
             gap={4}
             autoFlow="row dense"
             templateRows='repeat(2, 1fr)'
             templateColumns='repeat(3, 1fr)'
         >
-            <GridItem w='100%' >
+            { trips.map((trip) => <GridItem w='100%' >
                 <TripPanel
-                    title={test.title}
-                    countriesDesc={test.countriesDesc}
-                    durationDesc={test.durationDesc}
-                    emissionOffset={test.emissionOffset}
-                    rating={test.rating}
-                    imageUrl={test.imageUrl}
+                    title={trip.title}
+                    countriesDesc={trip.countriesDesc}
+                    durationDesc={trip.durationDesc}
+                    emissionOffset={trip.emissionOffset}
+                    rating={trip.rating}
+                    imageUrl={trip.imageUrl}
                 />
-            </GridItem>
-        </Grid>
-    );
+            </GridItem>)}
+        </Grid>}
+
+        { error && <Text fontSize='md' mb='2' align='center'>Sorry there was an error, please try later.</Text>}
+    </>);
 };
 
 export default Trips;

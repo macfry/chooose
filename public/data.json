@@ -1,0 +1,26 @@
+[
+    {
+        "title": "European Quest",
+        "countriesDesc": "8 countries",
+        "durationDesc": "21 Days",
+        "emissionOffset": "810kg",
+        "rating": 4.7,
+        "imageUrl": "https://picsum.photos/600/800"
+    },
+    {
+        "title": "Autumn Roadtrip",
+        "countriesDesc": "1 country",
+        "durationDesc": "14 Days",
+        "emissionOffset": "3.58t",
+        "rating": 4.7,
+        "imageUrl": "https://picsum.photos/600/600"
+    },
+    {
+        "title": "Diving Adventures",
+        "countriesDesc": "1 country",
+        "durationDesc": "5 Days",
+        "emissionOffset": "6.92t",
+        "rating": 4.7,
+        "imageUrl": "https://picsum.photos/600/900"
+    }
+]
